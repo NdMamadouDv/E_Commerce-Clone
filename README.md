@@ -17,5 +17,3 @@ Run commands
 2. `yarn install`
 
 3. `yarn run dev`
-
-![Template Screenshot](TemplateScreenshot.jpg?raw=true "Template Screenshot")
