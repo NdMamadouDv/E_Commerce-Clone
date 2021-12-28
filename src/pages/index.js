@@ -7,8 +7,8 @@ export default function Home({ products }) {
   // console.log(products);
   return (
     <div className="bg-gray-100">
-      <Head>
-        <title>Amazon 2.0</title>
+      <Head key="1">
+        <title key="title">Amazon 2.0</title>
       </Head>
       <Header />
       <main className="max-w-screen-2xl mx-auto">
