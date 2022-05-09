@@ -4,21 +4,20 @@ import {
   SearchIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/outline";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { selectItems } from "../slices/basketSlice";
 import { useSelector } from "react-redux";
 
-function Header() {
+function Header({}) {
   const { data: session } = useSession();
   const router = useRouter();
   const items = useSelector(selectItems);
 
-  // console.log(session);
   return (
-    <header className="">
+    <header className="sticky top-0 z-50">
       {/* Top nav bar */}
-      <div className="flex items-center bg-amazon_blue flex-grow py-2">
+      <div className=" relative flex items-center bg-amazon_blue flex-grow py-2">
         <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
           <Image
             onClick={() => router.push("/")}
@@ -40,7 +39,7 @@ function Header() {
         </div>
         {/* Right */}
         <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
-          <div className="link" onClick={!session ? signIn : signOut}>
+          <div className="link" onClick={() => router.push("/signin")}>
             <p>{session ? `Hello ${session.user.name}` : "Se connecter"}</p>
             <p className="font-extrabold md:text-sm">Compte et liste </p>
           </div>
@@ -77,7 +76,12 @@ function Header() {
         <p className=" link hidden lg:inline-flex ">Idées cadeaux</p>
         <p className=" link hidden lg:inline-flex ">Livres</p>
         <p className=" link hidden xl:inline-flex ">Cuisine et Maison</p>
-        <p className=" link hidden xl:inline-flex ">High-Tech</p>
+        <p
+          className=" link hidden xl:inline-flex "
+          onClick={() => router.push("/Electronics")}
+        >
+          High-Tech
+        </p>
         <p className=" link hidden xl:inline-flex ">Jeux et Jouets</p>
         <p className=" link hidden 2xl:inline-flex ">Informatique</p>
         <p className=" link hidden 2xl:inline-flex ">Jeux Vidéo</p>

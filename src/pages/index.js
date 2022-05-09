@@ -5,13 +5,14 @@ import Header from "../components/Header";
 import ProductFeed from "../components/ProductFeed";
 
 export default function Home({ products }) {
+  // const axios = axios();
   // console.log(products);
   return (
     <div className="bg-gray-100">
       <Head key="1">
         <title key="title">Amazon 2.0</title>
       </Head>
-      <Header />
+      <Header products={products} />
       <main className="max-w-screen-2xl mx-auto">
         {/* Banner */}
         <Banner />

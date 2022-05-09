@@ -8,9 +8,11 @@ import { useSession } from "next-auth/react";
 import Currency from "react-currency-formatter";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const stripePromise = loadStripe(process.env.stripe_public_key);
 function checkout() {
+  const router = useRouter();
   const items = useSelector(selectItems);
   // console.log(items);
   const { data: session } = useSession();
@@ -33,13 +35,14 @@ function checkout() {
   };
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 ">
       <Head key="checkout">
         <title key="title">Votre panier</title>
       </Head>
       <Header />
-      <main className="lg:flex max-w-2xl mx-auto">
+      <main className="lg:flex lg:flex-col max-w-2xl mx-auto h-">
         {/* Gauche */}
+        {/**/}
         <Image
           src="https://links.papareact.com/ikj"
           width={1020}
@@ -50,20 +53,33 @@ function checkout() {
           <h1 className=" text-3xl border-b pb-4">
             {items.length === 0 ? "Votre panier est vide" : "Votre panier"}
           </h1>
-          {items.map((item, i) => (
-            // console.log(item),
-            <CheckoutProduct
-              key={i}
-              id={item.id}
-              title={item.title}
-              rating={item.rating}
-              price={item.price}
-              description={item.description}
-              image={item.image}
-              hasPrime={item.hasPrime}
-              category={item.category}
-            />
-          ))}
+          {items.length === 0 ? (
+            <h2
+              onClick={() => router.push("/")}
+              className="hover:underline cursor-pointer"
+            >
+              Laissez-vous tenter par notre catalogue{" "}
+            </h2>
+          ) : (
+            items.map(
+              (item, i) => (
+                console.log(item),
+                (
+                  <CheckoutProduct
+                    key={i}
+                    id={item.id}
+                    title={item.title}
+                    rating={item.rating}
+                    price={item.price}
+                    description={item.description}
+                    image={item.image}
+                    hasPrime={item.hasPrime}
+                    category={item.category}
+                  />
+                )
+              )
+            )
+          )}
         </div>
         {/* Droite */}
         <div className="flex flex-col bg-white p-10 shadow-md">

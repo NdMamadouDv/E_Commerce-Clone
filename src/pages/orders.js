@@ -3,12 +3,14 @@ import { getSession, useSession } from "next-auth/react";
 import db from "../firebase";
 import moment from "moment";
 import Order from "../components/Order";
+import {useRouter} from 'next/router'
 
 
 function orders({ orders }) {
   //   const session = getSession();
   //   console.log(session);
-  const session = useSession();
+  const router = useRouter()
+  const { data: session } = useSession();
   console.log(orders);
   return (
     <div>
@@ -17,10 +19,12 @@ function orders({ orders }) {
         <h1 className="text-3xl border-b mb-2 pb-1 border-yellow-400">
           Vos commandes
         </h1>
-        {session ? (
+        {!session && orders ? (
           <h2>{orders.length} commande {orders.length> 1 ? "s" : ""}</h2>
         ) : (
-          <h2> Connectez vous pour voir vos commandes</h2>
+          <h2> Connectez vous pour voir vos commandes <span className="text-blue-600 cursor-pointer"
+          onClick={()=>{router.push('/signin')}}>Ici</span></h2>
+          
         )}
         <div className="mt-5 space-y-4">
           {
@@ -35,8 +39,8 @@ function orders({ orders }) {
               items= {items}
               timestamp= {timestamp}
               />
-            ))
-          }
+            )
+            )}
         </div>
       </main>
     </div>
