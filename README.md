@@ -1,19 +1,3 @@
-# Installation Steps
+This is my amazon'clone done with Nextjs redux and tailwindcss !
 
-## Using npm
-
-Run commands
-
-1. `npm install`
-
-2. `npm run dev`
-
-## Or using yarn
-
-Run commands
-
-1. `npm install --global yarn`
-
-2. `yarn install`
-
-3. `yarn run dev`
+Try this out !
